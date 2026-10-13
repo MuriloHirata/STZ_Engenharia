@@ -1,0 +1,27 @@
+# STZ_Engenharia — .gitignore
+
+# Ambiente de IA (fica só no local; não vai pro GitHub)
+.launcher/
+.opencode/
+docs/
+AGENTS.md
+GOVERNANCE.md
+opencode.json
+
+# Segredos
+.env
+*.env
+
+# Dependências e build
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+dist/
+build/
+
+# Sistema
+*.log
+.DS_Store
+Thumbs.db
