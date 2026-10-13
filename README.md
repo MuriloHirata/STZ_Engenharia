@@ -1,4 +1,4 @@
-# STZ_Frontend — MVP front-end (PI II)
+# STZ_Frontend — MVP front-end (PI II) #
 
 Protótipo estático (HTML/CSS/JS) puro, para visualizar o MVP do frontend, acesse o hiperlink e use os seguintes usuários e senha:
 ========================================================================
