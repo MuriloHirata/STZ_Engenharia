@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estoque — STZ Engenharia</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<div id="topbar"></div>
+<div class="shell">
+  <aside id="sidebar"></aside>
+  <main class="workspace">
+    <div class="page-head">
+      <h1 class="page-title">Painel de Gestão e Monitoramento de Estoque</h1>
+      <span class="pill pill-on">Monitoramento OP Ativo</span>
+    </div>
+
+    <div class="filtros">
+      <label>Período:
+        <select class="select"><option>Último Mês</option><option>Últimos 7 dias</option></select>
+      </label>
+      <label>Filtro:
+        <select class="select"><option>Todo o Almoxarifado</option><option>Matéria-prima</option><option>Consumíveis</option></select>
+      </label>
+    </div>
+
+    <div class="stack">
+      <section class="card">
+        <div class="card-header">KPIs Principais: Indicadores de Fluxo e Necessidade</div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="kpi">
+              <div class="label">Baixas Automáticas por OP</div>
+              <div class="stat" id="e-baixas">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Uso de Insumos Críticos</div>
+              <div class="stat" id="e-criticos">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Cálculo de Reposição Necessária</div>
+              <div class="stat" id="e-alertas">—</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="grid-2">
+        <section class="card">
+          <div class="card-header">Fluxo de Consumo de Insumos vs OPs</div>
+          <div class="card-body"><div class="barras" id="barras"></div></div>
+        </section>
+        <section class="card">
+          <div class="card-header">Itens Abaixo do Estoque Mínimo</div>
+          <div class="card-body">
+            <p class="nota">Saldo mínimo atingido: o sistema notifica a gerência para que a reposição seja tratada
+            pelo setor de compras no sistema atual (Gestão Click). Não há módulo de compras neste sistema (RF06).</p>
+            <div id="lista-alertas" style="margin-top:12px"></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card">
+        <div class="card-header">Posição de Estoque <span class="acao">Baixa automática por OP</span></div>
+        <div class="card-body" id="tabela-itens"></div>
+      </section>
+
+      <p class="nota">As baixas de material são realizadas automaticamente a partir dos apontamentos da Ordem de
+      Produção, mantendo saldo por item e por lote (RF06). A rastreabilidade registra código do item, lote e
+      quantidade consumida (RF03).</p>
+    </div>
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/logica.js"></script>
+<script src="js/app.js"></script>
+<script>
+  STZ.boot('estoque', 'estoque');
+  /* lista de alertas: itens abaixo do mínimo (alimentada após o render da tabela) */
+  (function () {
+    const abaixo = STZ_DATA.estoqueItens.filter(i => i.saldo < i.min);
+    document.getElementById('lista-alertas').innerHTML = abaixo.map(i =>
+      '<div class="chip-maq"><span>' + i.codigo + ' — ' + i.desc +
+      '<br><span class="det">saldo ' + i.saldo + ' · mínimo ' + i.min + '</span></span>' +
+      '<span class="pill pill-warn">Repor</span></div>').join('') ||
+      '<p class="vazio">Nenhum item abaixo do mínimo.</p>';
+  })();
+</script>
+</body>
+</html>
