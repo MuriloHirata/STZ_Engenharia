@@ -8,4 +8,4 @@ Operador: joao.pedro
 ========================================================================
 Senha: stz@2026
 
-**[▶️ MVP-Frontend-STZ](https://murilohirata.github.io/STZ_Engenharia/index.html)**<small>
+**[▶️ MVP-Frontend-STZ](https://murilohirata.github.io/STZ_Engenharia/index.html)**</small>
