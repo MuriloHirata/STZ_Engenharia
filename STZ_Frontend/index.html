@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login — STZ Engenharia</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<style>
+  body.login-page { min-height: 100vh; display: flex; flex-direction: column; background: var(--color-canvas); }
+  .login-top {
+    height: 48px; background: var(--color-ink); color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 20px; font-size: var(--text-label);
+  }
+  .login-top .marca { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; }
+  .login-wrap { flex: 1; display: grid; place-items: center; padding: 32px 16px; }
+  .login-card {
+    width: 100%; max-width: 340px;
+    background: var(--color-white);
+    border: 1px solid var(--color-steel);
+    border-radius: var(--radius-cards);
+    box-shadow: var(--shadow-card);
+    padding: 32px 28px;
+  }
+  .login-card h1 { font-size: 24px; margin-bottom: 4px; color: var(--color-ink); }
+  .login-card .sub { font-size: var(--text-label); color: var(--color-slate); margin-bottom: 24px; }
+  .login-card .btn { width: 100%; padding: 11px 16px; }
+  .login-card .btn + .btn { margin-top: 8px; }
+  .lembrar { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: var(--text-label); color: var(--color-slate); margin-bottom: 20px; }
+  .links { display: flex; justify-content: space-between; margin-top: 20px; font-size: var(--text-label); }
+  #aviso { display: block; background: #fdecec; border: 1px solid var(--color-alert-red); color: var(--color-alert-red); font-size: var(--text-label); border-radius: var(--radius-inputs); padding: 8px 10px; margin-bottom: 16px; }
+  .dica-demo { margin-top: 18px; font-size: 11px; color: var(--color-mist); text-align: center; }
+  .login-foot { display: flex; justify-content: space-between; font-size: 11px; color: var(--color-mist); padding: 0 20px 14px; }
+  .login-foot .centro { position: absolute; left: 50%; transform: translateX(-50%); }
+</style>
+</head>
+<body class="login-page">
+  <header class="login-top">
+    <span class="marca"><span class="brand-mark">&#9889;</span>STZ Engenharia</span>
+    <span>&#128274; Conexão Segura</span>
+  </header>
+
+  <main class="login-wrap">
+    <form class="login-card" id="form-login" novalidate>
+      <h1>Faça Log-In</h1>
+      <p class="sub">Insira suas credenciais corporativas para continuar.</p>
+
+      <p id="aviso" hidden></p>
+
+      <label class="campo"><span>Usuário</span>
+        <input id="usuario" name="usuario" type="text" placeholder="Insira o Usuário" autocomplete="username" required>
+      </label>
+      <label class="campo"><span>Senha</span>
+        <input id="senha" name="senha" type="password" placeholder="Insira a Senha" autocomplete="current-password" required>
+      </label>
+
+      <div class="lembrar">
+        <label><input type="checkbox" checked> Lembrar neste dispositivo</label>
+        <span>Último Acesso: <span id="ultimo-acesso">2026-05-24 08:12</span></span>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Entrar</button>
+      <button class="btn btn-outline" type="button" onclick="STZ.toast('MVP: pedido de acesso previsto na Fase B.')">Pedir Acesso</button>
+
+      <div class="links">
+        <a href="#" onclick="STZ.toast('MVP: recuperação de senha prevista na Fase B.'); return false;">Esqueceu a senha?</a>
+        <a href="mailto:suporte@stzengenharia.com.br">Contate o Suporte</a>
+      </div>
+
+      <p class="dica-demo">Demonstração: <strong>isadora</strong> (Administração) ou <strong>joao.pedro</strong> (Operador) · senha <strong>stz@2026</strong></p>
+    </form>
+  </main>
+
+  <footer class="login-foot">
+    <span>Versão 4.2.1 • MVP front-end</span>
+    <span class="centro">Suporte: <a href="mailto:suporte@stzengenharia.com.br">suporteTI@stzengenharia.com.br</a></span>
+    <span></span>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/logica.js"></script>
+  <script src="js/app.js"></script>
+  <script>STZ.boot('login', 'login');</script>
+</body>
+</html>

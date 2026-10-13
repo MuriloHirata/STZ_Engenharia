@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel de Produtividade — STZ Engenharia</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<div id="topbar"></div>
+<div class="shell">
+  <aside id="sidebar"></aside>
+  <main class="workspace">
+    <div class="page-head">
+      <h1 class="page-title">Painel de Produtividade em Tempo Real</h1>
+      <span class="pill pill-on">Tempo Real</span>
+    </div>
+
+    <div class="filtros">
+      <label>Período:
+        <select class="select" id="f-periodo">
+          <option value="hoje">Hoje</option>
+          <option value="vazio">Sem dados (teste de estado vazio)</option>
+        </select>
+      </label>
+      <label>Filtro:
+        <select class="select">
+          <option>Todo o Setor</option>
+          <option>Corte</option>
+          <option>Solda</option>
+          <option>Usinagem</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="stack">
+      <div class="banner-critico" id="banner-estouro" hidden>
+        <div>
+          <span class="eyebrow">Atenção — Estouro de orçamento</span>
+          <span class="texto" id="banner-estouro-texto"></span>
+        </div>
+        <button class="btn btn-outline" onclick="STZ.toast('MVP: detalhe da OP previsto na Fase B (ordens.html).')">Ver detalhes</button>
+      </div>
+
+      <section class="card">
+        <div class="card-header">KPIs Principais</div>
+        <div class="card-body">
+          <div class="grid-4" id="kpis">
+            <div class="kpi">
+              <div class="label">Taxa de Ocupação da Equipe</div>
+              <div class="stat" id="k-ocup">87 %</div>
+              <div class="bar"><i id="k-ocup-bar" style="width:87%"></i></div>
+            </div>
+            <div class="kpi">
+              <div class="label">Tarefas Concluídas</div>
+              <div class="stat" id="k-tarefas">42/50</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Horas Apontadas</div>
+              <div class="stat" id="k-horas">164h 30m</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Desvio de Produtividade</div>
+              <div class="stat neg" id="k-desvio">−4 %</div>
+            </div>
+          </div>
+          <p class="vazio" id="kpis-vazio" hidden>Sem apontamentos no período selecionado.</p>
+        </div>
+      </section>
+
+      <div class="grid-2">
+        <section class="card">
+          <div class="card-header">Apontamentos por Hora</div>
+          <div class="card-body chart" id="chart-linha"></div>
+        </section>
+        <section class="card">
+          <div class="card-header">Distribuição de Tempo por Projeto</div>
+          <div class="card-body" style="display:flex; gap:20px; align-items:center;">
+            <div class="donut" id="donut" role="img" aria-label="Distribuição de tempo por projeto"></div>
+            <ul class="legenda" id="legenda-donut"></ul>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid-2">
+        <section class="card">
+          <div class="card-header">Status Atual da Equipe</div>
+          <div class="card-body" id="equipe"></div>
+        </section>
+        <section class="card">
+          <div class="card-header">Ociosidade das Máquinas <span class="acao">US09 · TA09</span></div>
+          <div class="card-body" id="maquinas"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/logica.js"></script>
+<script src="js/app.js"></script>
+<script>STZ.boot('painel', 'painel');</script>
+</body>
+</html>
