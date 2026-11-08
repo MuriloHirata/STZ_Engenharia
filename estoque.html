@@ -33,12 +33,13 @@
         <div class="card-body">
           <div class="grid-3">
             <div class="kpi">
-              <div class="label">Baixas Automáticas por OP</div>
+              <div class="label">Baixas Automáticas por OP (mês)</div>
               <div class="stat" id="e-baixas">—</div>
             </div>
             <div class="kpi">
               <div class="label">Uso de Insumos Críticos</div>
               <div class="stat" id="e-criticos">—</div>
+              <span class="pill pill-on" id="e-criticos-pill" style="margin-top:6px">Seguro</span>
             </div>
             <div class="kpi">
               <div class="label">Cálculo de Reposição Necessária</div>
@@ -68,6 +69,11 @@
         <div class="card-body" id="tabela-itens"></div>
       </section>
 
+      <section class="card">
+        <div class="card-header">Histórico de Movimentações <span class="acao">últimas 6 · RF03</span></div>
+        <div class="card-body" id="historico"></div>
+      </section>
+
       <p class="nota">As baixas de material são realizadas automaticamente a partir dos apontamentos da Ordem de
       Produção, mantendo saldo por item e por lote (RF06). A rastreabilidade registra código do item, lote e
       quantidade consumida (RF03).</p>
@@ -78,17 +84,6 @@
 <script src="js/data.js"></script>
 <script src="js/logica.js"></script>
 <script src="js/app.js"></script>
-<script>
-  STZ.boot('estoque', 'estoque');
-  /* lista de alertas: itens abaixo do mínimo (alimentada após o render da tabela) */
-  (function () {
-    const abaixo = STZ_DATA.estoqueItens.filter(i => i.saldo < i.min);
-    document.getElementById('lista-alertas').innerHTML = abaixo.map(i =>
-      '<div class="chip-maq"><span>' + i.codigo + ' — ' + i.desc +
-      '<br><span class="det">saldo ' + i.saldo + ' · mínimo ' + i.min + '</span></span>' +
-      '<span class="pill pill-warn">Repor</span></div>').join('') ||
-      '<p class="vazio">Nenhum item abaixo do mínimo.</p>';
-  })();
-</script>
+<script>STZ.boot('estoque', 'estoque');</script>
 </body>
 </html>

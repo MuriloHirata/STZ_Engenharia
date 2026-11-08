@@ -102,6 +102,9 @@
   text-align: left;
   padding: 8px 12px;
 }
+/* tabelas grandes rolam dentro do card em telas estreitas (Etapa 4 — RNF08) */
+.card-body { overflow-x: auto; }
+
 .tabela td { font-size: var(--text-label); padding: 10px 12px; border-top: 1px solid var(--color-steel); }
 .tabela .num { text-align: right; font-variant-numeric: tabular-nums; }
 
@@ -115,6 +118,8 @@
   font-size: var(--text-label);
   margin-bottom: 8px;
 }
+/* linha inteira clicável nas permissões (Etapa 4 — alvo de toque maior) */
+#modulos .toggle-row { cursor: pointer; }
 .switch {
   width: 32px; height: 18px; flex-shrink: 0;
   border-radius: var(--radius-pills);
@@ -178,7 +183,9 @@
 .chart svg { display: block; width: 100%; height: auto; }
 
 /* Donut ----------------------------------------------------------------- */
-.donut { width: 150px; height: 150px; border-radius: 50%; flex-shrink: 0; }
+.donut { width: 150px; height: 150px; border-radius: 50%; flex-shrink: 0; position: relative; }
+/* furo central (Etapa 4): o guia pede donut, não pizza */
+.donut::after { content: ''; position: absolute; inset: 22%; border-radius: 50%; background: var(--color-white); }
 .legenda { list-style: none; font-size: var(--text-label); display: grid; gap: 6px; }
 .legenda li { display: flex; align-items: center; gap: 8px; }
 .legenda .quad { width: 10px; height: 10px; border-radius: 3px; }

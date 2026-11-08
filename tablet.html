@@ -25,7 +25,7 @@
   .t-col { display: grid; gap: 16px; align-content: start; }
   .t-card {
     background: #fff; border-radius: var(--radius-cards);
-    box-shadow: var(--shadow-card); padding: 16px;
+    box-shadow: none; border: 1px solid rgba(255,255,255,0.10); padding: 16px; /* guia: tablet sem sombras */
   }
   .t-card h2 { font-size: 16px; color: var(--color-ink); margin-bottom: 10px; }
   .t-card .det { font-size: var(--text-label); color: var(--color-slate); }
@@ -37,6 +37,9 @@
   .visualizador { background: #0b1020; border-radius: 8px; overflow: hidden; }
   .visualizador svg { display: block; width: 100%; height: auto; }
   .t-footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; color: var(--color-mist); font-size: var(--text-label); padding: 8px 16px 24px; max-width: 1100px; margin: 0 auto; }
+  /* guia: alvos de toque ≥ 44px no tablet (pill de pausa + botões da tabela) */
+  .t-header .pill { min-height: 44px; display: inline-flex; align-items: center; padding: 8px 14px; }
+  #materiais .btn { min-height: 44px; padding: 10px 14px; }
   .etapas-lista p { margin: 4px 0; font-size: var(--text-body); }
   #alerta-tempo { margin: 0; border-radius: 0; justify-content: center; text-align: center; }
 </style>
@@ -44,10 +47,10 @@
 <body class="tablet-page">
   <header class="t-header">
     <span class="marca"><span class="brand-mark">&#9889;</span>STZ Engenharia</span>
-    <span class="det" style="color:#cbd5e1">Operador: João Pedro</span>
-    <span class="chip">OP #1024-C</span>
+    <span class="det" style="color:#cbd5e1" id="t-operador">Operador —</span>
+    <select id="sel-op" title="OP em apontamento (UC06)" style="background:rgba(255,255,255,0.10); color:#fff; border:none; border-radius:var(--radius-inputs); padding:5px 8px; font-size:var(--text-label); font-weight:600; max-width:230px"></select>
     <span class="dir">
-      <span class="pill pill-on" id="pill-estado">RUNNING</span>
+      <button class="pill pill-warn" id="pill-estado" type="button" title="Pausar / retomar etapa (RUNNING ↔ PAUSED)">PARADA</button>
       <span style="color:#cbd5e1">v4.2.1 MVP</span>
       <a href="painel.html" style="color:var(--color-periwinkle)">Painel</a>
       <a href="index.html" style="color:var(--color-periwinkle)">Sair</a>
@@ -71,7 +74,7 @@
 
       <section class="t-card">
         <h2 style="text-align:center">Tempo de execução da Etapa Atual</h2>
-        <div class="cron-box" id="cronometro">02:30</div>
+        <div class="cron-box" id="cronometro">00:00</div>
         <p class="det" style="text-align:center; margin-top:8px">Hora Local: <span id="hora-local">--:--</span></p>
       </section>
 
@@ -91,7 +94,7 @@
     <div class="t-col">
       <section class="t-card">
         <h2>Visualizador de Projetos Técnicos</h2>
-        <p class="det" style="margin-bottom:8px">Desenho técnico da OP #1024-C (placeholder — US03: render ≤ 5 s).</p>
+        <p class="det" style="margin-bottom:8px" id="visualizador-det">Desenho técnico da OP (selecionada acima — US03: render ≤ 5 s).</p>
         <div class="visualizador">
           <svg viewBox="0 0 400 240" role="img" aria-label="Blueprint da peça">
             <rect width="400" height="240" fill="#0b1020"/>
@@ -120,7 +123,7 @@
   </main>
 
   <footer class="t-footer">
-    <span>Último acesso: 2026-05-26 07:18 — IP: 10.14.2.8</span>
+    <span id="t-acesso">Último acesso: —</span>
     <a href="mailto:suporte@stzengenharia.com.br">Contate o Suporte</a>
   </footer>
 

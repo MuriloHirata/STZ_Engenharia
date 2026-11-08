@@ -1,6 +1,9 @@
 /* Reset e shell ------------------------------------------------------- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* força o atributo [hidden] sobre qualquer display autoral (banner crítico, aviso etc.) */
+[hidden] { display: none !important; }
+
 body {
   font-family: var(--font-inter);
   font-size: var(--text-body);
@@ -92,8 +95,19 @@ h1, h2, h3 { color: var(--color-ink); }
 .nota { font-size: var(--text-label); color: var(--color-slate); }
 .vazio { font-size: var(--text-label); color: var(--color-slate); padding: var(--spacing-16) 0; text-align: center; }
 
+/* hamburguer do menu gaveta (Etapa 4): oculto no desktop, visível ≤900px.
+   ANTES do @media — mesma especificidade, a ordem decide quem vence. */
+.btn-menu { display: none; background: none; border: 0; padding: 6px; margin-left: -6px; cursor: pointer; color: var(--color-ink); }
+
 @media (max-width: 1100px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px) {
-  .sidebar { display: none; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  /* Menu mobile (Etapa 4): sidebar vira gaveta; hamburguer no topbar abre/fecha */
+  .sidebar {
+    position: fixed; top: var(--topbar-height); left: 0; bottom: 0; z-index: 40;
+    transform: translateX(-100%); transition: transform 0.2s ease;
+  }
+  .sidebar.aberta { transform: none; box-shadow: var(--shadow-card); }
+  .btn-menu { display: inline-flex; }
 }
+.backdrop { position: fixed; inset: var(--topbar-height) 0 0 0; z-index: 30; background: rgba(2, 6, 23, 0.45); border: 0; padding: 0; }
