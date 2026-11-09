@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ordens de Produção — STZ Engenharia</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<div id="topbar"></div>
+<div class="shell">
+  <aside id="sidebar"></aside>
+  <main class="workspace">
+    <div class="page-head">
+      <h1 class="page-title">Gerenciar Ordens de Produção</h1>
+      <span class="pill pill-on">UC06</span>
+    </div>
+
+    <div class="filtros">
+      <label>Unidade:
+        <select class="select"><option>Caldaria e Usinagem</option></select>
+      </label>
+      <button class="btn btn-primary" id="btn-nova-op" type="button">Nova OP</button>
+    </div>
+
+    <div class="stack">
+      <section class="card">
+        <div class="card-header">Ordens de Produção <span class="acao">cadastro, edição e BOM — Etapa 2 (Fase B)</span></div>
+        <div class="card-body" id="tabela-ops"></div>
+      </section>
+
+      <div class="grid-2">
+        <section class="card">
+          <div class="card-header" id="form-titulo">Nova OP</div>
+          <div class="card-body">
+            <form id="form-op">
+              <label class="campo"><span>Produto</span>
+                <input id="f-produto" placeholder="Ex.: Tubulação inox 3&quot;">
+              </label>
+              <label class="campo"><span>Quantidade (un)</span>
+                <input id="f-quantidade" type="number" min="1" placeholder="12">
+              </label>
+              <label class="campo"><span>Tempo previsto por etapa (seg)</span>
+                <input id="f-tempo" type="number" min="1" placeholder="150">
+              </label>
+              <label class="campo"><span>Orçamento (R$)</span>
+                <input id="f-orcamento" type="number" min="0" step="0.01" placeholder="10000">
+              </label>
+              <button class="btn btn-primary" type="submit">Salvar OP</button>
+            </form>
+            <p class="nota" style="margin-top:12px">O BOM vinculado é cadastrado no tablet/módulo de implantação;
+            aqui ele é exibido com o saldo em tempo real (fonte única de estoque).</p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header" id="bom-titulo">BOM</div>
+          <div class="card-body" id="tabela-bom"></div>
+        </section>
+      </div>
+
+      <section class="card">
+        <div class="card-header" id="docs-titulo">Documentos</div>
+        <div class="card-body" id="docs-lista"></div>
+      </section>
+
+      <p class="nota">Os apontamentos do tablet (etapas concluídas por OP) ficam persistidos e alimentam
+      esta lista: editar não perde progresso. BOM mesma fonte do estoque (RF06).</p>
+    </div>
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/logica.js"></script>
+<script src="js/app.js"></script>
+<script>STZ.boot('ordens', 'ordens');</script>
+</body>
+</html>

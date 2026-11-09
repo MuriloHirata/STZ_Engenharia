@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resultado por OP — STZ Engenharia</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<div id="topbar"></div>
+<div class="shell">
+  <aside id="sidebar"></aside>
+  <main class="workspace">
+    <div class="page-head">
+      <h1 class="page-title">Relatório de Resultado por OP</h1>
+      <span class="pill pill-on">UC11 · TA11</span>
+    </div>
+
+    <div class="filtros">
+      <label>Período:
+        <select class="select"><option>Todas as OPs</option></select>
+      </label>
+    </div>
+
+    <div class="stack">
+      <section class="card">
+        <div class="card-header">KPIs de Resultado</div>
+        <div class="card-body">
+          <div class="grid-3">
+            <div class="kpi">
+              <div class="label">Resultado Total (todas as OPs)</div>
+              <div class="stat" id="r-total">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">OPs no Prejuízo</div>
+              <div class="stat" id="r-prej">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Custo de Mão de Obra (valor-hora)</div>
+              <div class="stat" id="r-mo">—</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">Resultado por Ordem de Produção <span class="acao">lucro = valor registrado − MP − MO</span></div>
+        <div class="card-body" id="tabela-resultado"></div>
+      </section>
+
+      <p class="nota">A mão de obra usa o valor-hora individual de cada integrante (Isadora R$ 120/h,
+      Heloisa R$ 110/h, João Pedro R$ 65/h, Murilo R$ 60/h) multiplicado pelas horas alocadas na OP.
+      Lucro aparece em verde (Emerald) e prejuízo em vermelho (Alert Red). Resultados negativos
+      disparam revisão de orçamento na próxima OP do mesmo produto.</p>
+    </div>
+  </main>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/logica.js"></script>
+<script src="js/app.js"></script>
+<script>STZ.boot('resultado', 'resultado');</script>
+</body>
+</html>
